@@ -36,6 +36,9 @@ RUN set -ex \
         && curl -sSL https://github.com/shadowsocks/ipset/archive/shadowsocks.tar.gz | tar xz --strip 1 -C libipset \
         && curl -sSL https://github.com/shadowsocks/libcork/archive/shadowsocks.tar.gz | tar xz --strip 1 -C libcork \
         && curl -sSL https://github.com/shadowsocks/libbloom/archive/master.tar.gz | tar xz --strip 1 -C libbloom \
+        && wget -cq -O v2ray-plugin.tar.gz https://github.com/shadowsocks/v2ray-plugin/releases/download/v1.1.0/v2ray-plugin-linux-amd64-v1.1.0.tar.gz \
+        && tar xvzf v2ray-plugin.tar.gz \
+        && mv v2ray-plugin_linux_amd64 /usr/local/bin/v2ray-plugin \
         && ./autogen.sh \
         && ./configure --disable-documentation \
         && make install \
@@ -45,10 +48,11 @@ RUN set -ex \
 
 ENV SERVER_ADDR 0.0.0.0
 ENV SERVER_PORT 8388
-ENV METHOD      aes-256-cfb
+ENV METHOD      chacha20-ietf-poly1305
 ENV PASSWORD=
 ENV TIMEOUT     60
 ENV DNS_ADDR    8.8.8.8
+ENV ARGS -u
 
 EXPOSE $SERVER_PORT/tcp
 EXPOSE $SERVER_PORT/udp
@@ -59,5 +63,5 @@ CMD ss-server -s "$SERVER_ADDR" \
               -k "$PASSWORD"    \
               -t "$TIMEOUT"     \
               -d "$DNS_ADDR"    \
-              -u                \
-              --fast-open $OPTIONS
+              --fast-open \
+              $ARGS

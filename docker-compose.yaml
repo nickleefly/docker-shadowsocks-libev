@@ -1,0 +1,11 @@
+version: '3'
+services:
+  server:
+    image: nickleefly/shadowsocks-libev
+    ports:
+      - "8443:8388/tcp"
+      - "8443:8388/udp"
+    environment:
+      - METHOD=chacha20
+      - PASSWORD=ARe@lSecurePa44word!
+    restart: always
