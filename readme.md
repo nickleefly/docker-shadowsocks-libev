@@ -2,9 +2,12 @@
 This Dockerfile build an image for [shadowsocks-libev](https://github.com/shadowsocks/shadowsocks-libev/) with [v2ray-plugin](https://github.com/shadowsocks/v2ray-plugin), based on Alpine Linux.
 
 Current version:
-- shadowsocks-libev: v3.3.0
-- v2ray-plugin: v1.1.0
+- shadowsocks-libev: v3.3.4
+- v2ray-plugin: v1.3.0
 
+```
+docker build -t nickleefly/shadowsocks-libev:3.3.4-1.3.0 .
+```
 
 ## Quick Start
 
@@ -37,7 +40,7 @@ Use shell
 
 ```
 ## Create a container named shadowsocks-8080 with port 8080 published
-./easyss.sh --port 8080 --password your_password --method aes-256-cfb
+./easyss.sh --port 8080 --password your_password --method aes-256-gcm
 
 ## Stop the container
 docker kill shadowsocks-8080

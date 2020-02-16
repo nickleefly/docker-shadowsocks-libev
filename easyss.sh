@@ -4,7 +4,7 @@ OPTS=`getopt --long help,port:,password:,method: -n 'parse-options' -- "$@"`
 
 PORT=
 PASSWORD=
-METHOD="chacha20-ietf"
+METHOD="chacha20-ietf-poly1305"
 
 usage() {
 cat << EOF

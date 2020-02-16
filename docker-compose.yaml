@@ -6,6 +6,6 @@ services:
       - "8443:8388/tcp"
       - "8443:8388/udp"
     environment:
-      - METHOD=chacha20
+      - METHOD=chacha20-ietf-poly1305
       - PASSWORD=ARe@lSecurePa44word!
     restart: always

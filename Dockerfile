@@ -3,11 +3,12 @@
 #
 
 FROM alpine:3.8
-MAINTAINER EasyPi Software Foundation
+MAINTAINER Xiuyu Li
 
-ENV SS_VER 3.3.0
+ENV SS_VER 3.3.4
 ENV SS_URL https://github.com/shadowsocks/shadowsocks-libev/archive/v$SS_VER.tar.gz
 ENV SS_DIR shadowsocks-libev-$SS_VER
+ENV V2RAY_PLUGIN_VER 1.3.0
 
 RUN set -ex \
     && apk add --no-cache c-ares \
@@ -36,7 +37,7 @@ RUN set -ex \
         && curl -sSL https://github.com/shadowsocks/ipset/archive/shadowsocks.tar.gz | tar xz --strip 1 -C libipset \
         && curl -sSL https://github.com/shadowsocks/libcork/archive/shadowsocks.tar.gz | tar xz --strip 1 -C libcork \
         && curl -sSL https://github.com/shadowsocks/libbloom/archive/master.tar.gz | tar xz --strip 1 -C libbloom \
-        && wget -cq -O v2ray-plugin.tar.gz https://github.com/shadowsocks/v2ray-plugin/releases/download/v1.1.0/v2ray-plugin-linux-amd64-v1.1.0.tar.gz \
+        && wget -cq -O v2ray-plugin.tar.gz https://github.com/shadowsocks/v2ray-plugin/releases/download/v${V2RAY_PLUGIN_VER}/v2ray-plugin-linux-amd64-v${V2RAY_PLUGIN_VER}.tar.gz \
         && tar xvzf v2ray-plugin.tar.gz \
         && mv v2ray-plugin_linux_amd64 /usr/local/bin/v2ray-plugin \
         && ./autogen.sh \
